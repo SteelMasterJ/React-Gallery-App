@@ -4,6 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import apikey from './config';
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
 import PhotoContainer from './components/PhotoContainer';
