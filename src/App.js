@@ -54,12 +54,13 @@ class App extends Component {
         <div className="container">
           <SearchForm onSearch={this.performSearch} />
           <Nav />
-          {/* <Switch>
-            <Route path="/forests" render={ () => <PhotoContainer query='forests' /> } />
-            <Route path="/mountains" render={ () => <PhotoContainer query='mountains' /> } />
-            <Route path="/ocean" render={ () => <PhotoContainer query='ocean' /> } />
-          </Switch> */}
-          <PhotoContainer data={this.state.pictures} />
+          <Switch>
+            <Route path="/search/:id" render={ () => <PhotoContainer data={this.state.pictures} performSearch={this.performSearch} /> } />
+            <Route exact path="/forests" render={ () => <PhotoContainer data={this.state.pictures} /> } />
+            <Route exact path="/mountains" render={ () => <PhotoContainer data={this.state.pictures} /> } />
+            <Route exact path="/ocean" render={ () => <PhotoContainer data={this.state.pictures} /> } />
+            <PhotoContainer data={this.state.pictures} />
+          </Switch>          
         </div>
       </BrowserRouter>
     );
