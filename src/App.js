@@ -16,7 +16,8 @@ class App extends Component {
     super();
     this.state = {
       pictures: [],
-      loading: true
+      loading: true,
+      searchWord: ''
     };
   } 
 
@@ -26,7 +27,8 @@ class App extends Component {
       .then(response => {
         this.setState({
           pictures: response.data.photos.photo,
-          loading: false
+          loading: false,
+          searchWord: query
         });
       })
       .catch(error => {
@@ -35,16 +37,21 @@ class App extends Component {
   }
 
   performSearch = (query) => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => {
-        this.setState({
-          pictures: response.data.photos.photo,
-          loading: false
+    console.log(query);
+    console.log('performSearch has fired');
+    if(this.state.searchWord !== query) {
+      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+        .then(response => {
+          this.setState({
+            pictures: response.data.photos.photo,
+            loading: false,
+            searchWord: query
+          });
+        })
+        .catch(error => {
+          console.log('Error fetching and parsing data', error);
         });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
+    }
   }
 
   render() {
@@ -53,7 +60,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <SearchForm onSearch={this.performSearch} />
-          <Nav />
+          <Nav onSearch={this.performSearch} />
           <Switch>
             <Route path="/search/:id" render={ () => <PhotoContainer data={this.state.pictures} performSearch={this.performSearch} /> } />
             <Route exact path="/forests" render={ () => <PhotoContainer data={this.state.pictures} /> } />
