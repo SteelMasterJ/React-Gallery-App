@@ -1,3 +1,12 @@
+You will need your own Flickr API key from Flickr's App Garden.
+
+just create a new config.js file and use this code, replacing the YOUR API KEY with your actual API key.
+
+const apiKey = 'YOUR API KEY';
+export default apiKey;
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
