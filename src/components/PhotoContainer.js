@@ -1,9 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Photo from './Photo';
 import NotFound from './NotFound';
 
-const PhotoContainer = props => { 
-  
+const PhotoContainer = (props) => { 
+  const location = useLocation();
+
+  React.useEffect( () => {
+    console.log('mounted in container, location = ', location.pathname);
+    (location.pathname === '/') ? props.performSearch('cats') : props.performSearch(location.pathname.slice(8));
+  }, [location.pathname, props]);
+
   const results = props.data;
   let photos;
   if(results.length > 0) {
@@ -23,10 +30,14 @@ const PhotoContainer = props => {
 
   return(
     <div className="photo-container">
-        <h2>Results</h2>
-        <ul>
-            {photos}
-        </ul>
+      <h2>Results</h2>
+        {
+          (props.loading)
+          ? <p>loading...</p>
+          : ( <ul>
+                  {photos}
+              </ul>)
+        }
     </div>
   );
 }

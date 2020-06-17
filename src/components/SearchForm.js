@@ -14,7 +14,7 @@ const SearchForm = (props) => {
       ...formValues,
       [name]: value
     })
-    console.log(formValues);
+    //console.log(formValues);
   }
   
   const handleSubmit = e => {
@@ -22,10 +22,10 @@ const SearchForm = (props) => {
     history.push({
       pathname: `/search/${formValues.search}`
     })
-    console.log(formValues);
+    console.log('1st console log ' + formValues.search);
     props.onSearch(formValues.search);
     e.currentTarget.reset();
-    console.log(formValues);
+    console.log('2nd console log ' + formValues.search);
   }
   
   return (
