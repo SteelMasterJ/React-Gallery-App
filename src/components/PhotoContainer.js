@@ -33,10 +33,10 @@ const PhotoContainer = (props) => {
       <h2>Results</h2>
         {
           (props.loading)
-          ? <p>loading...</p>
+          ? (<p>loading...</p>)
           : ( <ul>
                   {photos}
-              </ul>)
+              </ul> )
         }
     </div>
   );

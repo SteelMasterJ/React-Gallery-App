@@ -30,14 +30,23 @@ class App extends Component {
         .then(response => {
           this.setState({
             pictures: response.data.photos.photo,
-            loading: false,
+            loading: true,
             searchWord: query
-          });
+          })
+          this.handleLoading();
         })
         .catch(error => {
           console.log('Error fetching and parsing data', error);
         });
     }
+  }
+
+  handleLoading = () => {
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      })
+    }, 500)
   }
 
   render() {
@@ -48,7 +57,7 @@ class App extends Component {
           <SearchForm onSearch={this.performSearch} />
           <Nav onSearch={this.performSearch} />
           <Switch>
-            <Route path="/search/:id" render={ () => <PhotoContainer data={this.state.pictures} performSearch={this.performSearch} loading={this.state.loading}/> } />
+            <Route exact path="/search/:id" render={ () => <PhotoContainer data={this.state.pictures} performSearch={this.performSearch} loading={this.state.loading}/> } />
             <Route exact path="/" render={ () => <PhotoContainer data={this.state.pictures} performSearch={this.performSearch}/>} />
             <Route component={ForOhFor} />
           </Switch>          
