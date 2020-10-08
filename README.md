@@ -2,6 +2,9 @@ You will need your own Flickr API key from Flickr's App Garden.
 
 just create a new config.js file and use this code, replacing the YOUR API KEY with your actual API key.
 
+
+copy below and paste into your own config.js file:
+
 const apiKey = 'YOUR API KEY';
 export default apiKey;
 
